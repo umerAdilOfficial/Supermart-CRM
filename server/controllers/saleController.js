@@ -119,3 +119,24 @@ exports.getDashboard = async (req, res) => {
     topProduct,
   });
 };
+
+exports.getDashboard = async (req, res) => {
+  try {
+    const sales = await Sale.find();
+
+    const totalSales = sales.length;
+    const totalRevenue = sales.reduce((sum, s) => sum + s.total, 0);
+
+    const customers = await Customer.countDocuments();
+    const products = await Product.countDocuments();
+
+    res.json({
+      totalSales,
+      totalRevenue,
+      totalCustomers: customers,
+      totalProducts: products,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

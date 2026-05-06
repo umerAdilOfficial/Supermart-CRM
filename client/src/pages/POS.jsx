@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getProducts, createSale } from "../api";
 import { findCustomerByPhone } from "../api";
+import BarcodeScanner from "../components/BarcodeScanner";
+import { getProductByBarcode } from "../api";
 
 export default function POS() {
   const [products, setProducts] = useState([]);
@@ -98,6 +100,16 @@ export default function POS() {
     }
   };
 
+  const handleScan = async (barcode) => {
+    try {
+      const res = await getProductByBarcode(barcode);
+      const product = res.data;
+
+      addToCart(product);
+    } catch (err) {
+      console.log("Product not found");
+    }
+  };
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-800 mb-1">Point of Sale</h2>
@@ -241,6 +253,10 @@ export default function POS() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mb-4">
+        <h3 className="text-sm font-semibold mb-2">Scan Product</h3>
+        <BarcodeScanner onScan={handleScan} />
       </div>
     </div>
   );

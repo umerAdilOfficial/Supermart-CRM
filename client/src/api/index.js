@@ -21,3 +21,6 @@ export const getCustomerProfile = (id) => api.get(`/customers/${id}/profile`);
 
 export const findCustomerByPhone = (phone) =>
   api.get(`/customers/phone/${phone}`);
+
+export const getProductByBarcode = (code) =>
+  api.get(`/products/barcode/${code}`);
