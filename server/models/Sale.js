@@ -1,7 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const saleItemSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
   name: { type: String, required: true },
   price: { type: Number, required: true },
   quantity: { type: Number, required: true, min: 1 },
@@ -11,9 +15,17 @@ const saleSchema = new mongoose.Schema(
   {
     items: [saleItemSchema],
     total: { type: Number, required: true, min: 0 },
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', default: null },
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Customer",
+      default: null,
+    },
+    customerSnapshot: {
+      name: { type: String, default: null },
+      phone: { type: String, default: null },
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports = mongoose.model('Sale', saleSchema);
+module.exports = mongoose.model("Sale", saleSchema);

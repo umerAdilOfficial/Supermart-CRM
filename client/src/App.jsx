@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Inventory from "./pages/Inventory";
 import POS from "./pages/POS";
 import Customers from "./pages/Customers";
+import CustomerProfile from "./pages/CustomerProfile";
 
 const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: "📊" },
@@ -63,6 +64,7 @@ export default function App() {
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/pos" element={<POS />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/:id" element={<CustomerProfile />} />
           </Routes>
         </main>
       </div>

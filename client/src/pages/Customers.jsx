@@ -5,10 +5,12 @@ import {
   updateCustomer,
   deleteCustomer,
 } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const EMPTY_FORM = { name: "", phone: "" };
 
 export default function Customers() {
+  const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
@@ -175,6 +177,12 @@ export default function Customers() {
                     {new Date(c.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-5 py-3 text-left space-x-2">
+                    <button
+                      onClick={() => navigate(`/customers/${c._id}`)}
+                      className="text-blue-600 hover:text-blue-800 text-xs font-medium"
+                    >
+                      History
+                    </button>
                     <button
                       onClick={() => handleEdit(c)}
                       className="text-brand-600 hover:text-brand-800 text-xs font-medium"
