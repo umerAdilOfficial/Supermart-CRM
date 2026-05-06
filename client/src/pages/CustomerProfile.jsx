@@ -10,8 +10,12 @@ export default function CustomerProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/customers/${id}/profile`)
-      .then((res) => setData(res.data));
+      .get(`https://supermart-crm-1.onrender.com/api/customers/${id}/profile`)
+      .then((res) => setData(res.data))
+      .catch((err) => {
+        console.error(err);
+        setData(null);
+      });
   }, [id]);
 
   if (!data) return <p>Loading...</p>;
